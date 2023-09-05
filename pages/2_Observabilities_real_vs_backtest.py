@@ -1,0 +1,180 @@
+#################################
+### Importando as bibliotecas ###
+#################################
+
+import numpy as np
+import warnings
+import datetime as dt
+import pandas as pd
+import time
+import datetime as dt
+import plotly.graph_objects as go
+import plotly.express as px
+import streamlit as st
+
+#################################
+###       Preâmbulo       ###
+#################################
+
+st.write("# Observabilities: Real vs Backtest")
+
+st.write("#### Nesta página vamos mergulhar em alguns detalhes importantes da diferença ")
+
+st.markdown('''
+        De forma resumida, queremos fazer um diagnóstico preciso de como os **trades** das estratégias 
+        que eu utilizo **estão diferindo** (ou não) do **backtest** realizado. Tal análise é importante para
+        eventuais recalibragens na estimação de "custos" dos trades.
+            
+        Farei aqui então as seguintes análises:
+        1. **Delta Estratégia =** como o retorno de cada trade (entrada e saída) difere do backtest
+        2. **Slippage entrada =** como o preço de entrada (long/short) está diferendo do preço de backtest
+        3. **Slippage saída =** como o preço de entrada (long/short) está diferendo do preço de backtest
+            
+        -----
+            
+        ''')
+
+#################################
+###  0. Data Prep  ###
+#################################
+
+### Importando json com parametros de data inicial - data final
+df_params = pd.read_json('params_patt_rsi6.json')
+data_ini = df_params['data_ini'][0]
+data_fim = df_params['data_fim'][0]
+
+# Importando dados de trades reais
+dfmt5_2 = pd.read_csv('bases/dados_real_mt5.csv', index_col=['time'], parse_dates=['time'])
+
+# Importando dados teóricos 
+dft = pd.read_csv('bases/sol_6_5m.csv', index_col=['time'], parse_dates=['time'])
+# Selecionando apenas entradas
+dft = dft[dft['strategy_2']!=0]
+dft.columns = dft.columns + '_teo'
+dft.rename(columns = {'safra_teo': 'safra'}, inplace = True)
+
+
+# Concat para união do real e teórico
+df = pd.concat([dfmt5_2[['price_ent','price_ext','lucro','cstrategy_2','comment']], dft.iloc[:,2:]], axis =1)
+#df = pd.merge(df, dft[['open_teo','close_teo','position_teo']], left_index=True, right_index=True)
+df.loc[df.position_teo==1, 'posi'] = 'long'
+df.loc[df.position_teo==-1, 'posi'] = 'short'
+
+df['slippage_ent'] = df['position_teo']*(df['price_ent'] - df['close_teo'])
+df['dif_strat'] = df['lucro'] - df['strategy_2_teo']
+df['hit_alvo'] = 0
+df.loc[df['comment'].str.contains('\[', na=False), 'hit_alvo'] = 1
+
+
+#################################
+###  1. Delta Strategy ###
+#################################
+
+# Observando a diferença no resultado dos trades
+figdelstr = px.box(df, y="dif_strat", color='posi', points="all", color_discrete_sequence=['red','green'])
+
+# adicionando elementos de layout
+figdelstr.update_layout(
+    title = dict(text="1. Delta Estratégia por trade", font=dict(size=27), automargin=False, yref='paper'),
+    xaxis_title= dict(text="<b> Hit </b>", font=dict(size=20)),
+    yaxis_title= dict(text="<b>Diferença (R$) </b>", font=dict(size=20)),
+    font_family="Arial",
+    font_color="black",
+    title_font_family="Arial",
+    title_font_color="black",
+    legend_title_font_color="green",
+    showlegend=True,
+    autosize=False,
+    width=800,
+    height=500,
+    
+    xaxis=dict(
+        showline=True,
+        showgrid=True,
+        showticklabels=True,
+        linecolor='white',
+        linewidth=2,
+        ticks='outside',
+        tickfont=dict(
+            family='Arial',
+            size=15,
+            color='black',
+        ),
+    ),
+    yaxis=dict(
+        showline=True,
+        showgrid=True,
+        showticklabels=True,
+        linecolor='white',
+        linewidth=2,
+        ticks='outside',
+        tickfont=dict(
+            family='Arial',
+            size=15,
+            color='black',
+        ),
+    )
+)
+
+# Plot!
+figdelstr.update_layout(legend_title_text='Position')
+st.plotly_chart(figdelstr, use_container_width=True)
+
+st.write('A média e mediana estando acima ou igual à 0 indica que **não** estamos subestimando os \
+         custos de operação. O que é bom pois nos dá confiança no resultado do backtest que foi feito.')
+
+#################################
+###  2. slippage entrada/saida  ###
+#################################
+
+# Observando a diferença no resultado dos trades
+figslp = px.box(df, y="slippage_ent", color='posi', points="all", color_discrete_sequence=['red','green'])
+
+# adicionando elementos de layout
+figslp.update_layout(
+    title = dict(text="2. Slippage", font=dict(size=27), automargin=False, yref='paper'),
+    xaxis_title= dict(text="<b> Hit </b>", font=dict(size=20)),
+    yaxis_title= dict(text="<b> Slippage (em pontos de WINFUT) </b>", font=dict(size=20)),
+    font_family="Arial",
+    font_color="black",
+    title_font_family="Arial",
+    title_font_color="black",
+    legend_title_font_color="green",
+    showlegend=True,
+    autosize=False,
+    width=800,
+    height=500,
+    
+    xaxis=dict(
+        showline=True,
+        showgrid=True,
+        showticklabels=True,
+        linecolor='white',
+        linewidth=2,
+        ticks='outside',
+        tickfont=dict(
+            family='Arial',
+            size=15,
+            color='black',
+        ),
+    ),
+    yaxis=dict(
+        showline=True,
+        showgrid=True,
+        showticklabels=True,
+        linecolor='white',
+        linewidth=2,
+        ticks='outside',
+        tickfont=dict(
+            family='Arial',
+            size=15,
+            color='black',
+        ),
+    )
+)
+
+# Plot!
+figslp.update_layout(legend_title_text='Position')
+st.plotly_chart(figslp, use_container_width=True)
+
+st.write('O slippage...')
