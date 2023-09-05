@@ -37,7 +37,7 @@ df = df.dropna()
 
 
 #################################
-###  1. Plot Resultado  ###
+###  1. Retorno Acumulado  ###
 #################################
 
 
@@ -50,9 +50,70 @@ figback.add_trace(go.Scatter(
 
 # adicionando elementos de layout
 figback.update_layout(
-    title = dict(text="1. Retorno Acumulado", font=dict(size=27), automargin=False, yref='paper'),
-    xaxis_title= dict(text="<b> Data </b>", font=dict(size=20)),
-    yaxis_title= dict(text="<b>Retorno (R$) </b>", font=dict(size=20)),
+    title = dict(text="1. Cumulative Return", font=dict(size=27), automargin=False, yref='paper'),
+    xaxis_title= dict(text="<b> Date </b>", font=dict(size=20)),
+    yaxis_title= dict(text="<b>Return (R$) </b>", font=dict(size=20)),
+    font_family="Arial",
+    font_color="black",
+    title_font_family="Arial",
+    title_font_color="black",
+    legend_title_font_color="green",
+    showlegend=True,
+    autosize=False,
+    width=800,
+    height=500,
+    
+    xaxis=dict(
+        showline=True,
+        showgrid=True,
+        showticklabels=True,
+        linecolor='white',
+        linewidth=2,
+        ticks='outside',
+        tickfont=dict(
+            family='Arial',
+            size=15,
+            color='black',
+        ),
+    ),
+    yaxis=dict(
+        showline=True,
+        showgrid=True,
+        showticklabels=True,
+        linecolor='white',
+        linewidth=2,
+        ticks='outside',
+        tickfont=dict(
+            family='Arial',
+            size=15,
+            color='black',
+        ),
+    )
+)
+
+# Plot!
+figback.update_layout(legend_title_text='Legend')
+st.plotly_chart(figback, use_container_width=True)
+
+
+#################################
+###  2. Drawdown  ###
+#################################
+
+
+figback = go.Figure()
+figback.add_trace(go.Scatter(
+    x=df.index,
+    y=df["dd"],
+    name='Backtest',
+    fill='tozeroy'
+))
+
+# adicionando elementos de layout
+figback.update_layout(
+    title = dict(text="2. Drawdown", font=dict(size=27), automargin=False, yref='paper'),
+    xaxis_title= dict(text="<b> Date </b>", font=dict(size=20)),
+    yaxis_title= dict(text="<b> DD (R$) </b>", font=dict(size=20)),
     font_family="Arial",
     font_color="black",
     title_font_family="Arial",
