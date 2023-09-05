@@ -7,33 +7,26 @@ import datetime as dt
 import pandas as pd
 import streamlit as st
 
-st.write("# Bem-vindo à página de resultados do AlgoTrader BR! 👋")
-st.sidebar.success("Selecione a página acima")
+st.write("# Welcome to the AlgoTrader BR results page! 👋")
+st.sidebar.success("Select page above")
 
 st.markdown(
     """
-    ## Introdução
+    ## Introduction
 
-    Nesta página você poderá encontrar os resultados dos meus trades diários em
-    **conta real**! A ideia é que a atualização seja quase em *real-time*.     
+    On this page you can find the results of my daily trades in
+    **real account**! The idea is that the update is almost *real-time*.
 
-    Atualmente meus sistemas de **algo trading** são especializados em *day trade* para o mini-indice (**WINFUT**), onde
-    os trades são executados de forma **100% automatizadas** utilizando o MetaTrader 5.
+    Currently my **algo trading** systems are specialized in *day trade* for the brazilian mini-index
+    (**WINFUT**), where trades are executed **100% automated** using MetaTrader 5.
 
-   👈 Selecione a página ao lado para obter as informações que você deseja.
-    Seja informações de **performance** (backtest e/ou real), **estatísticas dos trades** (e.g. ganhos/perdas),
-    e também o detalhamento das **diferenças de backtest e conta real**.
+   👈 Select the page on the side to get the information you want.
+    Be it **performance** information (backtest and/or actual), **trade statistics** (e.g. profit/loss),
+    and also the breakdown of **backtest and real account differences**.
 
-    ### Quer aprender mais?
+    ### Contact
 
-    - Check out [streamlit.io](https://streamlit.io)
-    - Jump into our [documentation](https://docs.streamlit.io)
-    - Ask a question in our [community
-      forums](https://discuss.streamlit.io)
-
-    ### Contato
-
-    - Dúvidas e sugestões, por favor entrar em contato pelo e-mail: algotraderbr@gmail.com
+    - Questions and suggestions, please contact me by email: algotraderbr@gmail.com
 
 """
 )
