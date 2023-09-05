@@ -16,17 +16,18 @@ import streamlit as st
 
 st.write("# Observabilities: Real vs Backtest")
 
-st.write("#### Nesta página vamos mergulhar em alguns detalhes importantes da diferença ")
+st.write("#### On this page we will dive into some important details of the difference in results \
+          from the real account and the backtest ")
 
 st.markdown('''
-        De forma resumida, queremos fazer um diagnóstico preciso de como os **trades** das estratégias 
-        que eu utilizo **estão diferindo** (ou não) do **backtest** realizado. Tal análise é importante para
-        eventuais recalibragens na estimação de "custos" dos trades.
-            
-        Farei aqui então as seguintes análises:
-        1. **Delta Estratégia =** como o retorno de cada trade (entrada e saída) difere do backtest
-        2. **Slippage entrada =** como o preço de entrada (long/short) está diferendo do preço de backtest
-        3. **Slippage saída =** como o preço de entrada (long/short) está diferendo do preço de backtest
+        In summary, we want to make an accurate diagnosis of how the **trades** of the strategies
+        that I use **are different** (or not) from the **backtest** carried out. Such an analysis 
+        is important for eventual recalibrations in estimating the "costs" of trades.
+        
+        I will then do the following analyses:
+        1. **Delta Strategy =** how the return of each trade (entry and exit) differs from the backtest
+        2. **Entry slippage =** as the entry price (long/short) is different from the backtest price
+        3. **Exit Slippage =** as the entry price (long/short) is different from the backtest price
             
         -----
             

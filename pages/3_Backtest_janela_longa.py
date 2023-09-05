@@ -16,12 +16,13 @@ import streamlit as st
 
 st.write("# Backtests")
 
-st.write("#### Nesta página eu detalho como está o desempenho dos backtests")
+st.write("#### On this page I detail how the backtests are performing in the long run")
 
 st.markdown('''
-        Antes de fazer o deploy de estratégia de *algo trading* em conta real, é preciso estudar em minúcias
-        o resultado do backtest por um período de tempo relativamente longo.
-            
+        
+        Before deploying an *algo trading* strategy on a real account, it is necessary to study in detail
+        the backtest result for a relatively long period of time.
+                        
         -----
             
         ''')

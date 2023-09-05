@@ -14,23 +14,23 @@ import streamlit as st
 ###       Preâmbulo       ###
 #################################
 
-st.write("# Monitoramento de Performance")
+st.write("# Performance Monitoring")
 
-st.write("#### Nesta página vamos colocar todas as métricas de performance das estratégias em funcionamento.")
+st.write("#### On this page we will put all the performance metrics of the strategies into action")
 
 st.markdown('''
-        Para uma análise de performance informativa e completa das estratégias de algo trading
-        desenvolvidas por mim, disponibilizo as seguintes métricas e visões:
-        1. Retorno Acumulado - conta real e backtest
-        2. Indices de risco/retorno: a) [Sharpe](https://pt.wikipedia.org/wiki/%C3%8Dndice_de_Sharpe),
-             b) [Sortino](https://en.wikipedia.org/wiki/Sortino_ratio), 
-            c) [Calmar](https://www.investopedia.com/terms/c/calmarratio.asp)
-        3. Drawdown da estratégia
-        4. Performance Diária/Semanal 
-        5. Percentual de trades vencedores/perdedores
-            
-        Obs.: Sempre que estiver falando de lucro, entenda-se lucro bruto antes dos impostos.
-        Por exemplo, no day trade (caso das minhas estratégias), devemos pagar 20% de IR. Leia mais em:
+        For an informative and complete performance analysis of algo trading strategies
+        developed by me, I provide the following metrics and views:
+        1. Accumulated Return - real account and backtest
+        2. Risk/return ratios: a) [Sharpe](https://pt.wikipedia.org/wiki/%C3%8Ddice_de_Sharpe),
+            b) [Sortino](https://en.wikipedia.org/wiki/Sortino_ratio),
+            c) [Calm](https://www.investopedia.com/terms/c/calmarratio.asp)
+        3. Strategy Drawdown
+        4. Daily/Weekly Performance
+        5. Percentage of winning/losing trades
+        
+        Note: Whenever we are talking about profit, we mean gross profit before taxes.
+        For example, on day trades (as is the case with my strategies), we must pay 20% IR. Read more at:
         https://blog.nubank.com.br/darf-day-trade-2023/ 
             
         -----
@@ -127,8 +127,7 @@ figret.update_layout(legend_title_text='Legend')
 st.plotly_chart(figret, use_container_width=True)
 
 
-st.write('Como podemos ver acima, o algoritmo executado em conta real está aderente aos resultados \
-        do backtest')
+st.write('As we can see above, the algorithm running on a real account adheres to the backtest results')
 
 
 #################################
@@ -193,7 +192,7 @@ figdd.update_layout(
 # Plot!
 st.plotly_chart(figdd, use_container_width=True)
 
-st.write('Podemos observar um drawdown controlado e sem muitas surpresas.')
+st.write('We can observe a controlled drawdown without many surprises.')
 
 #################################
 ###  3. Performance Diária  ###
@@ -257,8 +256,8 @@ figd.update_layout(
 # Plot!
 st.plotly_chart(figd, use_container_width=True)
 
-st.write('Novamente, podemos ver o bom acordo de resultados entre o resultado da conta real e o \
-         resultado esperado pelo backtest.')
+st.write('Again, we can see the good result agreement between the real account result and the \
+          expected backtest result.')
 
 #################################
 ###  4. Trades vencedeores/perdedores  ###
