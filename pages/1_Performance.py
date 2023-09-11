@@ -43,10 +43,10 @@ data_ini = df_params['data_ini'][0]
 data_fim = df_params['data_fim'][0]
 
 # Importando dados de trades reais
-dfmt5_2 = pd.read_csv('bases/dados_real_mt5.csv', index_col=['time'], parse_dates=['time'])
+dfmt5_2 = pd.read_csv('bases/dados_real_mt5_strat2.csv', index_col=['time'], parse_dates=['time'])
 
 # Importando dados teóricos 
-dft = pd.read_csv('bases/sol_6_5m.csv', index_col=['time'], parse_dates=['time'])
+dft = pd.read_csv('bases/backtest_deploy_strat2.csv', index_col=['time'], parse_dates=['time'])
 # Selecionando apenas entradas
 dft = dft[dft['strategy_2']!=0]
 dft.columns = dft.columns + '_teo'

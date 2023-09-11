@@ -32,7 +32,7 @@ st.markdown('''
 #################################
 
 # Importando backtest
-df = pd.read_csv('bases/sol_6_5m_full.csv', index_col=['time'], parse_dates=['time'])
+df = pd.read_csv('bases/backtest_full_strat2.csv', index_col=['time'], parse_dates=['time'])
 df = df.dropna()
 
 

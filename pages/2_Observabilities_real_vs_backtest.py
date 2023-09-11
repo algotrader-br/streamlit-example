@@ -43,10 +43,10 @@ data_ini = df_params['data_ini'][0]
 data_fim = df_params['data_fim'][0]
 
 # Importando dados de trades reais
-dfmt5_2 = pd.read_csv('bases/dados_real_mt5.csv', index_col=['time'], parse_dates=['time'])
+dfmt5_2 = pd.read_csv('bases/dados_real_mt5_strat2.csv', index_col=['time'], parse_dates=['time'])
 
 # Importando dados teóricos 
-dft = pd.read_csv('bases/sol_6_5m.csv', index_col=['time'], parse_dates=['time'])
+dft = pd.read_csv('bases/backtest_deploy_strat2.csv', index_col=['time'], parse_dates=['time'])
 # Selecionando apenas entradas
 dft = dft[dft['strategy_2']!=0]
 dft.columns = dft.columns + '_teo'
@@ -119,8 +119,8 @@ figdelstr.update_layout(
 figdelstr.update_layout(legend_title_text='Position')
 st.plotly_chart(figdelstr, use_container_width=True)
 
-st.write('A média e mediana estando acima ou igual à 0 indica que **não** estamos subestimando os \
-         custos de operação. O que é bom pois nos dá confiança no resultado do backtest que foi feito.')
+st.write('The mean and median being above or equal to 0 indicates that we are **not** underestimating trading costs.\
+          This is a good sign because it gives us confidence in the results of the backtest that was carried out')
 
 #################################
 ###  2. slippage entrada/saida  ###
@@ -176,4 +176,4 @@ figslp.update_layout(
 figslp.update_layout(legend_title_text='Position')
 st.plotly_chart(figslp, use_container_width=True)
 
-st.write('O slippage...')
+st.write('The slippage...')
