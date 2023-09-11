@@ -37,6 +37,12 @@ st.markdown('''
             
         ''')
 
+option = st.selectbox(
+    'How would you like to be contacted?',
+    ('Email', 'Home phone', 'Mobile phone'))
+
+st.write('You selected:', option)
+
 ### Importando json com parametros de data inicial - data final
 df_params = pd.read_json('params_patt_rsi6.json')
 data_ini = df_params['data_ini'][0]
