@@ -91,9 +91,9 @@ figret.add_trace(go.Scatter(
 
 # adicionando elementos de layout
 figret.update_layout(
-    title = dict(text="1. Retorno Acumulado", font=dict(size=27), automargin=False, yref='paper'),
+    title = dict(text="1. Cumulative Return", font=dict(size=27), automargin=False, yref='paper'),
     xaxis_title= dict(text="<b> Data </b>", font=dict(size=20)),
-    yaxis_title= dict(text="<b>Retorno (R$) </b>", font=dict(size=20)),
+    yaxis_title= dict(text="<b>Return (R$) </b>", font=dict(size=20)),
     font_family="Arial",
     font_color="black",
     title_font_family="Arial",
@@ -230,9 +230,9 @@ figd = px.bar(aux, x=aux.index, y=["Real",'Backtest'], barmode='group',
 
 # adicionando elementos de layout
 figd.update_layout(
-    title = dict(text="4. Retorno Diário", font=dict(size=27), automargin=False, yref='paper'),
+    title = dict(text="4. Daily Return", font=dict(size=27), automargin=False, yref='paper'),
     xaxis_title= dict(text="<b> Data </b>", font=dict(size=20)),
-    yaxis_title= dict(text="<b>Retorno (R$) </b>", font=dict(size=20)),
+    yaxis_title= dict(text="<b>Return (R$) </b>", font=dict(size=20)),
     font_family="Arial",
     font_color="black",
     title_font_family="Arial",
