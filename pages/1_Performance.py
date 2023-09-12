@@ -21,7 +21,7 @@ st.write("#### On this page we will put all the performance metrics of the strat
 st.markdown('''
         For an informative and complete performance analysis of algo trading strategies
         developed by me, I provide the following metrics and views:
-        1. Accumulated Return - real account and backtest
+        1. Cumulative Return (in R$) - real account and backtest
         2. Risk/return ratios: a) [Sharpe](https://pt.wikipedia.org/wiki/%C3%8Ddice_de_Sharpe),
             b) [Sortino](https://en.wikipedia.org/wiki/Sortino_ratio),
             c) [Calm](https://www.investopedia.com/terms/c/calmarratio.asp)
