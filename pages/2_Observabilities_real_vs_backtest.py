@@ -48,7 +48,7 @@ st.write('You selected:', option_strat)
 strat = option_strat.split('-')[0]
 
 ### Importando json com parametros de data inicial - data final
-df_params = pd.read_json('params_patt_rsi6.json')
+df_params = pd.read_json(f'params_strat{strat}.json')
 data_ini = df_params['data_ini'][0]
 data_fim = df_params['data_fim'][0]
 
