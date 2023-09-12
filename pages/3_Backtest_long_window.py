@@ -31,8 +31,18 @@ st.markdown('''
 ###  0. Data Prep  ###
 #################################
 
+# Selecting the desired strategy
+option_strat = st.selectbox(
+    'Which Strategy would you like to select?',
+    ('2-Surfing the trend', '3-Iron box'))
+
+st.write('You selected:', option_strat)
+
+# this parameter will be used to import some tables
+strat = option_strat.split('-')[0]
+
 # Importando backtest
-df = pd.read_csv('bases/backtest_full_strat2.csv', index_col=['time'], parse_dates=['time'])
+df = pd.read_csv(f'bases/backtest_full_strat{strat}.csv', index_col=['time'], parse_dates=['time'])
 df = df.dropna()
 
 
