@@ -37,11 +37,15 @@ st.markdown('''
             
         ''')
 
-option = st.selectbox(
-    'How would you like to be contacted?',
-    ('Email', 'Home phone', 'Mobile phone'))
+# Selecting the desired strategy
+option_strat = st.selectbox(
+    'Which Strategy would you like to select?',
+    ('2-Surfing the trend', '3-Iron box'))
 
-st.write('You selected:', option)
+st.write('You selected:', option_strat)
+
+# this parameter will be used to import some tables
+strat = option_strat.str.split('-')[0]
 
 ### Importando json com parametros de data inicial - data final
 df_params = pd.read_json('params_patt_rsi6.json')
@@ -49,10 +53,10 @@ data_ini = df_params['data_ini'][0]
 data_fim = df_params['data_fim'][0]
 
 # Importando dados de trades reais
-dfmt5_2 = pd.read_csv('bases/dados_real_mt5_strat2.csv', index_col=['time'], parse_dates=['time'])
+dfmt5_2 = pd.read_csv(f'bases/dados_real_mt5_strat{strat}.csv', index_col=['time'], parse_dates=['time'])
 
 # Importando dados teóricos 
-dft = pd.read_csv('bases/backtest_deploy_strat2.csv', index_col=['time'], parse_dates=['time'])
+dft = pd.read_csv(f'bases/backtest_deploy_strat{strat}.csv', index_col=['time'], parse_dates=['time'])
 # Selecionando apenas entradas
 dft = dft[dft['strategy_2']!=0]
 dft.columns = dft.columns + '_teo'
