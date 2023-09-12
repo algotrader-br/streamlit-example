@@ -45,7 +45,7 @@ option_strat = st.selectbox(
 st.write('You selected:', option_strat)
 
 # this parameter will be used to import some tables
-strat = option_strat.str.split('-')[0]
+strat = option_strat.split('-')[0]
 
 ### Importando json com parametros de data inicial - data final
 df_params = pd.read_json('params_patt_rsi6.json')
