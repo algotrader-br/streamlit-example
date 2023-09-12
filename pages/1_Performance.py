@@ -155,7 +155,15 @@ dfmt5_2["dd"] = dfmt5_2['cstrategy_2'] - dfmt5_2['cummax']
 dfmt5_2["max_dd"] = dfmt5_2["dd"].cummin()
 
 # Plotando
-figdd = px.line(dfmt5_2, x=dfmt5_2.index, y=["dd"])
+#figdd = px.line(dfmt5_2, x=dfmt5_2.index, y=["dd"])
+
+figdd = go.Figure()
+figdd.add_trace(go.Scatter(
+    x=dfmt5_2.index,
+    y=dfmt5_2["dd"],
+    name='Real',
+    fill='tozeroy'
+))
 
 figdd.update_layout(
     title = dict(text="3. Drawdown", font=dict(size=27), automargin=False, yref='paper'),
