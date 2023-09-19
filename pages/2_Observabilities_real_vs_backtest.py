@@ -142,7 +142,7 @@ figslp = px.box(df, y="slippage_ent", color='posi', points="all", color_discrete
 
 # adicionando elementos de layout
 figslp.update_layout(
-    title = dict(text="2. Slippage", font=dict(size=27), automargin=False, yref='paper'),
+    title = dict(text="2. Slippage - entries", font=dict(size=27), automargin=False, yref='paper'),
     xaxis_title= dict(text="<b> Hit </b>", font=dict(size=20)),
     yaxis_title= dict(text="<b> Slippage (WINFUT points) </b>", font=dict(size=20)),
     font_family="Arial",
