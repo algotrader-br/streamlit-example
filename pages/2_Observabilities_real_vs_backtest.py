@@ -68,6 +68,7 @@ df = pd.concat([dfmt5_2[['price_ent','price_ext','lucro','cstrategy_2','comment'
 #df = pd.merge(df, dft[['open_teo','close_teo','position_teo']], left_index=True, right_index=True)
 df.loc[df.position_teo==1, 'posi'] = 'long'
 df.loc[df.position_teo==-1, 'posi'] = 'short'
+df = df[~df['posi'].isnull()]
 
 df['slippage_ent'] = df['position_teo']*(df['price_ent'] - df['close_teo'])
 df['dif_strat'] = df['lucro'] - df['strategy_2_teo']
