@@ -40,7 +40,7 @@ st.markdown('''
 # Selecting the desired strategy
 option_strat = st.selectbox(
     'Which Strategy would you like to select?',
-    ('2-Surfing the trend', '3-Iron box'))
+    ('2-Surfing the trend', '3-Iron box', '4-gold 13','5-gold 1011'))
 
 st.write('You selected:', option_strat)
 
