@@ -52,7 +52,7 @@ else:
         dftmp = pd.read_csv(f'bases/backtest_full_strat{i}.csv', index_col=['time'], parse_dates=['time'])
         dftmp.rename(columns={'cstrategy':f'cstrategy_{i}'}, inplace=True)
         dftmp.drop(columns=['dd'], inplace=True)
-        dftmp = dftmp.resample('d').last()
+        dftmp = dftmp.resample('d').last().ffill()
         df = pd.concat([df, dftmp], axis = 1)
 
     df['cstrategy'] = df.sum(axis=1)
