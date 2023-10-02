@@ -77,7 +77,7 @@ figback.add_trace(go.Scatter(
 
 # adicionando elementos de layout
 figback.update_layout(
-    title = dict(text="1. Cumulative Return", font=dict(size=27), automargin=False, yref='paper'),
+    title = dict(text="1. Cumulative Return - all together", font=dict(size=27), automargin=False, yref='paper'),
     xaxis_title= dict(text="<b> Date </b>", font=dict(size=20)),
     yaxis_title= dict(text="<b>Return (R$) </b>", font=dict(size=20)),
     font_family="Arial",
@@ -133,13 +133,13 @@ if strat == '0':
         figback2.add_trace(go.Scatter(
             x=df.index,
             y=df[f"cstrategy_{i}"],
-            name='Backtest'
+            name=f'Strat_{i}'
         ))
 
 
     # adicionando elementos de layout
     figback2.update_layout(
-        title = dict(text="1. Cumulative Return", font=dict(size=27), automargin=False, yref='paper'),
+        title = dict(text="1. Cumulative Return - by strategy", font=dict(size=27), automargin=False, yref='paper'),
         xaxis_title= dict(text="<b> Date </b>", font=dict(size=20)),
         yaxis_title= dict(text="<b>Return (R$) </b>", font=dict(size=20)),
         font_family="Arial",
