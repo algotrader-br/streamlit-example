@@ -244,3 +244,24 @@ figback.update_layout(
 # Plot!
 figback.update_layout(legend_title_text='Legend')
 st.plotly_chart(figback, use_container_width=True)
+
+
+#################################
+###      3. Correlation    ###
+#################################
+
+
+if strat == '0':
+
+    st.markdown('''
+        
+        Measuring weekly return correlations among the strategies
+            
+        ''')
+    
+
+    df_ret = df.resample('w').first() - df.resample('w').last()
+    corr = df_ret.iloc[:, :-1].corr()
+    
+    fig = px.imshow(corr, text_auto=True)
+    fig.show()
