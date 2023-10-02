@@ -57,7 +57,6 @@ else:
 
     df['cstrategy'] = df.sum(axis=1)
 
-    st.dataframe(df.head())
 
 
 
