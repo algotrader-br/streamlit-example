@@ -34,7 +34,7 @@ st.markdown('''
 # Selecting the desired strategy
 option_strat = st.selectbox(
     'Which Strategy would you like to select?',
-    ('2-Surfing the trend', '3-Iron box', '4-gold 13','5-gold 1011'))
+    ('0-All','2-Surfing the trend', '3-Iron box', '4-gold 13','5-gold 1011'))
 
 st.write('You selected:', option_strat)
 
@@ -42,14 +42,27 @@ st.write('You selected:', option_strat)
 strat = option_strat.split('-')[0]
 
 # Importando backtest
-df = pd.read_csv(f'bases/backtest_full_strat{strat}.csv', index_col=['time'], parse_dates=['time'])
-df = df.dropna()
+if strat !='0':
+    df = pd.read_csv(f'bases/backtest_full_strat{strat}.csv', index_col=['time'], parse_dates=['time'])
+    df = df.dropna()
+
+else:
+    df = pd.DataFrame()
+    for i in [2,3,4,5]:
+        dftmp = pd.read_csv(f'bases/backtest_full_strat{i}.csv', index_col=['time'], parse_dates=['time'])
+        dftmp.rename(columns={'cstrategy':f'cstrategy_'+{i}})
+        df = pd.concat([df, dftmp], axis = 1)
+
+    df['cstrategy'] = df.sum(axis=1)
+
 
 
 #################################
 ###  1. Retorno Acumulado  ###
 #################################
 
+
+# Ploting all together
 
 figback = go.Figure()
 figback.add_trace(go.Scatter(
@@ -104,6 +117,69 @@ figback.update_layout(
 # Plot!
 figback.update_layout(legend_title_text='Legend')
 st.plotly_chart(figback, use_container_width=True)
+
+
+
+## Separating the strategies
+
+if strat == '0':
+
+    figback2 = go.Figure()
+    for i in [2,3,4,5]:
+        figback2.add_trace(go.Scatter(
+            x=df.index,
+            y=df[f"cstrategy_{i}"],
+            name='Backtest'
+        ))
+
+
+    # adicionando elementos de layout
+    figback2.update_layout(
+        title = dict(text="1. Cumulative Return", font=dict(size=27), automargin=False, yref='paper'),
+        xaxis_title= dict(text="<b> Date </b>", font=dict(size=20)),
+        yaxis_title= dict(text="<b>Return (R$) </b>", font=dict(size=20)),
+        font_family="Arial",
+        font_color="black",
+        title_font_family="Arial",
+        title_font_color="black",
+        legend_title_font_color="green",
+        showlegend=True,
+        autosize=False,
+        width=800,
+        height=500,
+        
+        xaxis=dict(
+            showline=True,
+            showgrid=True,
+            showticklabels=True,
+            linecolor='white',
+            linewidth=2,
+            ticks='outside',
+            tickfont=dict(
+                family='Arial',
+                size=15,
+                color='black',
+            ),
+        ),
+        yaxis=dict(
+            showline=True,
+            showgrid=True,
+            showticklabels=True,
+            linecolor='white',
+            linewidth=2,
+            ticks='outside',
+            tickfont=dict(
+                family='Arial',
+                size=15,
+                color='black',
+            ),
+        )
+    )
+
+    # Plot!
+    figback2.update_layout(legend_title_text='Legend')
+    st.plotly_chart(figback2, use_container_width=True)
+
 
 
 #################################
