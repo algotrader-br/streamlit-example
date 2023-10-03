@@ -71,6 +71,7 @@ df.loc[df.position_teo==-1, 'posi'] = 'short'
 df = df[~df['posi'].isnull()]
 
 df['slippage_ent'] = df['position_teo']*(df['price_ent'] - df['close_teo'])
+df['slippage_ext'] = df['position_teo']*(df['price_ext'] - df['pts_final'] - df['close_teo'])
 df['dif_strat'] = df['lucro'] - df['strategy_2_teo']
 df['hit_alvo'] = 0
 df.loc[df['comment'].str.contains('\[', na=False), 'hit_alvo'] = 1
@@ -137,12 +138,63 @@ st.write('The mean and median being above or equal to 0 indicates that we are **
 ###  2. slippage entrada/saida  ###
 #################################
 
-# Observando a diferença no resultado dos trades
+# Observando a diferença no resultado dos trades - entries
 figslp = px.box(df, y="slippage_ent", color='posi', points="all", color_discrete_sequence=['red','green'])
 
 # adicionando elementos de layout
 figslp.update_layout(
     title = dict(text="2. Slippage - entries", font=dict(size=27), automargin=False, yref='paper'),
+    xaxis_title= dict(text="<b> Hit </b>", font=dict(size=20)),
+    yaxis_title= dict(text="<b> Slippage (WINFUT points) </b>", font=dict(size=20)),
+    font_family="Arial",
+    font_color="black",
+    title_font_family="Arial",
+    title_font_color="black",
+    legend_title_font_color="green",
+    showlegend=True,
+    autosize=False,
+    width=800,
+    height=500,
+    
+    xaxis=dict(
+        showline=True,
+        showgrid=True,
+        showticklabels=True,
+        linecolor='white',
+        linewidth=2,
+        ticks='outside',
+        tickfont=dict(
+            family='Arial',
+            size=15,
+            color='black',
+        ),
+    ),
+    yaxis=dict(
+        showline=True,
+        showgrid=True,
+        showticklabels=True,
+        linecolor='white',
+        linewidth=2,
+        ticks='outside',
+        tickfont=dict(
+            family='Arial',
+            size=15,
+            color='black',
+        ),
+    )
+)
+
+# Plot!
+figslp.update_layout(legend_title_text='Position')
+st.plotly_chart(figslp, use_container_width=True)
+
+
+# Observando a diferença no resultado dos trades - exits
+figslp = px.box(df, y="slippage_ext", color='posi', points="all", color_discrete_sequence=['red','green'])
+
+# adicionando elementos de layout
+figslp.update_layout(
+    title = dict(text="2. Slippage - exits", font=dict(size=27), automargin=False, yref='paper'),
     xaxis_title= dict(text="<b> Hit </b>", font=dict(size=20)),
     yaxis_title= dict(text="<b> Slippage (WINFUT points) </b>", font=dict(size=20)),
     font_family="Arial",

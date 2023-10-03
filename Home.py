@@ -21,7 +21,7 @@ st.markdown(
     (**WINFUT**), where trades are executed **100% automated** using MetaTrader 5.
 
    👈 Select the page on the side to get the information you want.
-    Be it **performance** information (backtest and/or actual), **trade statistics** (e.g. profit/loss),
+    Be it **performance** information (backtest and/or real live trading), **trade statistics** (e.g. profit/loss),
     and also the breakdown of **backtest and real account differences**.
 
     ### Contact
