@@ -263,7 +263,7 @@ if strat == '0':
 
     st.markdown('''
         
-        Measuring weekly return correlations among the strategies
+        Measuring weekly return correlations between strategies
             
         ''')
     
@@ -276,8 +276,8 @@ if strat == '0':
     # adicionando elementos de layout
     figcorr.update_layout(
         title = dict(text="3. Correlation between strats", font=dict(size=27), automargin=False, yref='paper'),
-        xaxis_title= dict(text="<b> Date </b>", font=dict(size=20)),
-        yaxis_title= dict(text="<b> DD (R$) </b>", font=dict(size=20)),
+        xaxis_title= dict(text="<b> Strategies </b>", font=dict(size=20)),
+        yaxis_title= dict(text="<b> Strategies </b>", font=dict(size=20)),
         font_family="Arial",
         font_color="black",
         title_font_family="Arial",
