@@ -271,5 +271,49 @@ if strat == '0':
     df_ret = df.resample('w').first() - df.resample('w').last()
     corr = df_ret.iloc[:, :-3].corr()
     
-    fig = px.imshow(corr, text_auto=True)
-    fig.show()
+    figcorr = px.imshow(corr, text_auto=True)
+
+    # adicionando elementos de layout
+    figcorr.update_layout(
+        title = dict(text="3. Correlation between strats", font=dict(size=27), automargin=False, yref='paper'),
+        xaxis_title= dict(text="<b> Date </b>", font=dict(size=20)),
+        yaxis_title= dict(text="<b> DD (R$) </b>", font=dict(size=20)),
+        font_family="Arial",
+        font_color="black",
+        title_font_family="Arial",
+        title_font_color="black",
+        legend_title_font_color="green",
+        showlegend=True,
+        autosize=False,
+        width=800,
+        height=500,
+        
+        xaxis=dict(
+            showline=True,
+            showgrid=True,
+            showticklabels=True,
+            linecolor='white',
+            linewidth=2,
+            ticks='outside',
+            tickfont=dict(
+                family='Arial',
+                size=15,
+                color='black',
+            ),
+        ),
+        yaxis=dict(
+            showline=True,
+            showgrid=True,
+            showticklabels=True,
+            linecolor='white',
+            linewidth=2,
+            ticks='outside',
+            tickfont=dict(
+                family='Arial',
+                size=15,
+                color='black',
+            ),
+        )
+    )
+
+    st.plotly_chart(figcorr, use_container_width=True)
