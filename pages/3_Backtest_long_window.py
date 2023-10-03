@@ -42,10 +42,13 @@ st.write('You selected:', option_strat)
 strat = option_strat.split('-')[0]
 
 # Importando backtest
+
+# Visualizando estratégias individuais
 if strat !='0':
     df = pd.read_csv(f'bases/backtest_full_strat{strat}.csv', index_col=['time'], parse_dates=['time'])
     df = df.dropna()
 
+# Visualizando resultado consolidado
 else:
     df = pd.DataFrame()
     for i in [2,3,4,5]:
@@ -55,7 +58,12 @@ else:
         dftmp = dftmp.resample('d').last().ffill()
         df = pd.concat([df, dftmp], axis = 1)
 
+    # estratégia acumulada
     df['cstrategy'] = df.sum(axis=1)
+
+    # Cálculo do drawdown
+    df['cummax'] = df['cstrategy'].cummax()
+    df["dd"] = df['cstrategy'] - df['cummax']
 
 
 
@@ -261,7 +269,7 @@ if strat == '0':
     
 
     df_ret = df.resample('w').first() - df.resample('w').last()
-    corr = df_ret.iloc[:, :-1].corr()
+    corr = df_ret.iloc[:, :-3].corr()
     
     fig = px.imshow(corr, text_auto=True)
     fig.show()
