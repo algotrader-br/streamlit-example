@@ -68,7 +68,7 @@ else:
     # Importando todas as estratégias
     df = pd.DataFrame()
     for i in [2,3,4,5]:
-        dftmp = pd.read_csv(f'bases/dados_real_mt5_{i}.csv', index_col=['time'], parse_dates=['time'])
+        dftmp = pd.read_csv(f'bases/dados_real_mt5_strat{i}.csv', index_col=['time'], parse_dates=['time'])
         dftmp.rename(columns={'cstrategy_2':f'cstrategy_{i}'}, inplace=True)
         dftmp = dftmp[[f'cstrategy_{i}']]
         dftmp = dftmp.resample('d').last().ffill()
