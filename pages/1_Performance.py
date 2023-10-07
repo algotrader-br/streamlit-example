@@ -149,6 +149,64 @@ if strat !='0':
     st.plotly_chart(figret, use_container_width=True)
 
 else:
+    
+    # Plot returns -- all together
+    figret2 = go.Figure()
+    figret2.add_trace(go.Scatter(
+        x=df.index,
+        y=df[f"cstrategy"],
+        name=f'Real'
+    ))
+
+
+    # adicionando elementos de layout
+    figret2.update_layout(
+        title = dict(text="1. Cumulative Return - All together", font=dict(size=27), automargin=False, yref='paper'),
+        xaxis_title= dict(text="<b> Data </b>", font=dict(size=20)),
+        yaxis_title= dict(text="<b>Return (R$) </b>", font=dict(size=20)),
+        font_family="Arial",
+        font_color="black",
+        title_font_family="Arial",
+        title_font_color="black",
+        legend_title_font_color="green",
+        showlegend=True,
+        autosize=False,
+        width=800,
+        height=500,
+        
+        xaxis=dict(
+            showline=True,
+            showgrid=True,
+            showticklabels=True,
+            linecolor='white',
+            linewidth=2,
+            ticks='outside',
+            tickfont=dict(
+                family='Arial',
+                size=15,
+                color='black',
+            ),
+        ),
+        yaxis=dict(
+            showline=True,
+            showgrid=True,
+            showticklabels=True,
+            linecolor='white',
+            linewidth=2,
+            ticks='outside',
+            tickfont=dict(
+                family='Arial',
+                size=15,
+                color='black',
+            ),
+        )
+    )
+
+    # Plot!
+    figret2.update_layout(legend_title_text='Legend')
+    st.plotly_chart(figret2, use_container_width=True)
+
+    #### Plot Returns by strategy
     figret = go.Figure()
     for i in [2,3,4,5]:
         figret.add_trace(go.Scatter(
@@ -160,7 +218,7 @@ else:
 
     # adicionando elementos de layout
     figret.update_layout(
-        title = dict(text="1. Cumulative Return", font=dict(size=27), automargin=False, yref='paper'),
+        title = dict(text="1. Cumulative Return - by Strategy", font=dict(size=27), automargin=False, yref='paper'),
         xaxis_title= dict(text="<b> Data </b>", font=dict(size=20)),
         yaxis_title= dict(text="<b>Return (R$) </b>", font=dict(size=20)),
         font_family="Arial",
